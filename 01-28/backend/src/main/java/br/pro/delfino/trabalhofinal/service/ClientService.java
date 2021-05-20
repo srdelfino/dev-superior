@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.modelmapper.MappingException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -72,7 +73,7 @@ public class ClientService {
 
 			dto = modelMapper.map(entity, ClientDTO.class);
 			return dto;
-		} catch (EntityNotFoundException exception) {
+		} catch (EntityNotFoundException | MappingException  exception) {
 			throw new ResourceNotFoundException("ID não encontrado: " + id);
 		}
 	}
